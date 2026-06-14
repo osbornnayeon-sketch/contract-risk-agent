@@ -1,6 +1,6 @@
 # 类案检索速配智能体
 
-这是一个用 Python 标准库实现的本地 Web 演示应用，面向课堂作业、案例分析训练和模拟法庭准备。
+这是一个用 Python 标准库实现的 Web 演示应用，面向课堂作业、案例分析训练和模拟法庭准备，支持本地运行和公网部署。
 
 ## 功能
 
@@ -38,6 +38,22 @@ http://192.168.1.23:8765
 ```
 
 如果希望互联网中的任何人都能访问，需要部署到云服务器、Render、Railway、Vercel/Serverless Python 平台，或使用 ngrok、Cloudflare Tunnel 等内网穿透工具。
+
+## 制作公开网址（Render）
+
+项目已经配置为监听 `0.0.0.0`，并附带 `render.yaml`。`0.0.0.0` 不是供人打开的网址，它表示程序接受部署平台转发的外部访问。真正的公开网址由 Render 在部署成功后生成。
+
+1. 把本项目上传到你自己的 GitHub 仓库。
+2. 登录 Render，选择 **New + → Blueprint**。
+3. 连接该 GitHub 仓库，Render 会自动读取 `render.yaml`。
+4. 在 Render 的环境变量中填写 `OPENAI_API_KEY`；建议同时填写 `APP_PASSWORD`，避免任何人无限制使用你的 API。
+5. 部署完成后，Render 会显示形如 `https://case-search-agent-xxxx.onrender.com` 的公开网址。
+
+本地运行时仍然打开：
+
+```text
+http://127.0.0.1:8765
+```
 
 ## 说明
 

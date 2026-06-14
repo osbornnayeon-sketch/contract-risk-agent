@@ -19,7 +19,7 @@ from urllib.parse import parse_qs, urlparse
 from legal_kb_client import LegalKnowledgeBaseClient
 
 
-HOST = os.environ.get("HOST", "127.0.0.1")
+HOST = os.environ.get("HOST", "0.0.0.0")
 PORT = int(os.environ.get("PORT", 8765))
 OFFICIAL_CASE_LIBRARY_URL = "http://rmfyalk.court.gov.cn"
 CASE_LIBRARY_PATH = Path(__file__).with_name("cases.json")
@@ -1979,8 +1979,9 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> None:
     server = ThreadingHTTPServer((HOST, PORT), Handler)
-    print(f"类案检索速配智能体已启动：http://127.0.0.1:{PORT}")
-    print(f"同一局域网设备可使用本机 IP 访问，例如：http://你的电脑IP:{PORT}")
+    print(f"类案检索速配智能体已启动，监听地址：{HOST}:{PORT}")
+    print(f"本机访问：http://127.0.0.1:{PORT}")
+    print(f"局域网访问：http://你的电脑IP:{PORT}")
     print(f"法律知识库状态：{LEGAL_KB_CLIENT.status()['message']}")
     print(f"访问密码：{'已启用' if APP_PASSWORD else '未启用（设置 APP_PASSWORD 可开启）'}")
     print("按 Ctrl+C 停止服务。")
